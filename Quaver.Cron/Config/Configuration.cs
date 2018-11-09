@@ -41,6 +41,11 @@ namespace Quaver.Cron.Config
         public bool RecalculateOverallAccuracy { get; }
 
         /// <summary>
+        ///     Detrmines if during the cron, we'll calculate the overall performance rating for users.
+        /// </summary>
+        public bool RecalculateOverallPerformanceRating { get; }
+
+        /// <summary>
         ///     The path of the config file.
         /// </summary>
         private static string ConfigPath { get; } = $"./.env";
@@ -64,6 +69,7 @@ namespace Quaver.Cron.Config
                 FixMultiplePersonalBestScores = DotNetEnv.Env.GetBool("FixMultiplePersonalBestScores");
                 SyncScoresWithRankedStatus = DotNetEnv.Env.GetBool("SyncScoresWithRankedStatus");
                 RecalculateOverallAccuracy = DotNetEnv.Env.GetBool("RecalculateOverallAccuracy");
+                RecalculateOverallPerformanceRating = DotNetEnv.Env.GetBool("RecalculateOverallPerformanceRating");
             }
             catch (Exception e)
             {
@@ -81,6 +87,7 @@ namespace Quaver.Cron.Config
         public override string ToString() => $"PopulateLeaderboards = {PopulateLeaderboards}\n" +
                                              $"FixMultiplePersonalBestScores = {FixMultiplePersonalBestScores}\n" +
                                              $"SyncScoresWithRankedStatus = {SyncScoresWithRankedStatus}\n" +
-                                             $"RecalculateOverallAccuracy = {RecalculateOverallAccuracy}";
+                                             $"RecalculateOverallAccuracy = {RecalculateOverallAccuracy}\n" +
+                                             $"RecalculateOverallPerformanceRating = {RecalculateOverallPerformanceRating}";
     }
 }

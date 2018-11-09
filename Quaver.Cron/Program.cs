@@ -65,6 +65,9 @@ namespace Quaver.Cron
             if (Config.RecalculateOverallAccuracy)
                 Pool.QueueWorkItem(Accuracy.RecalculateOverall);
 
+            if (Config.RecalculateOverallPerformanceRating)
+                Pool.QueueWorkItem(PerformanceRating.RecalculateOverall);
+
             while (Pool.CurrentWorkItemsCount != 0)
             {
             }
