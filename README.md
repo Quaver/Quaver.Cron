@@ -1,4 +1,4 @@
-# Quaver.Cron [![Discord](https://discordapp.com/api/guilds/354206121386573824/widget.png?style=shield)](https://discord.gg/nJa8VFr)
+﻿# Quaver.Cron [![Discord](https://discordapp.com/api/guilds/354206121386573824/widget.png?style=shield)](https://discord.gg/nJa8VFr)
 
 >🕒 A cron for Quaver to perform automated tasks related to its database.
 
@@ -35,6 +35,8 @@ Workers = 8
 PopulateLeaderboards = True
 FixMultiplePersonalBestScores = True
 SyncScoresWithRankedStatus = True
+RecalculateOverallAccuracy = True
+RecalculateOverallPerformanceRating = True
 ```
 
 # LICENSE
