@@ -68,7 +68,10 @@ namespace Quaver.Cron
 
             if (Config.FixMultiplePersonalBestScores)
                 Pool.QueueWorkItem(Scores.FixMultiplePersonalBests);
-                  
+
+            if (Config.SyncScoresWithRankedStatus)
+                Pool.QueueWorkItem(Scores.SyncScoresWithRankedStatus);
+                    
             while (Pool.CurrentWorkItemsCount != 0)
             {
             }

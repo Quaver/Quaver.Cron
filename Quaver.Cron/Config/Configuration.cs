@@ -31,6 +31,11 @@ namespace Quaver.Cron.Config
         public bool FixMultiplePersonalBestScores { get; }
 
         /// <summary>
+        ///     Determines if during the cron, we'll remove scores that are no longer on ranked maps.
+        /// </summary>
+        public bool SyncScoresWithRankedStatus { get; }
+
+        /// <summary>
         ///     The path of the config file.
         /// </summary>
         private static string ConfigPath { get; } = $"{Program.WorkingDirectory}/.env";
@@ -52,6 +57,7 @@ namespace Quaver.Cron.Config
                 Workers = DotNetEnv.Env.GetInt("Workers");
                 PopulateLeaderboards = DotNetEnv.Env.GetBool("PopulateLeaderboards");
                 FixMultiplePersonalBestScores = DotNetEnv.Env.GetBool("FixMultiplePersonalBestScores");
+                SyncScoresWithRankedStatus = DotNetEnv.Env.GetBool("SyncScoresWithRankedStatus");
             }
             catch (Exception e)
             {
@@ -69,7 +75,8 @@ namespace Quaver.Cron.Config
         public override string ToString()
         {
             return $"PopulateLeaderboards = {PopulateLeaderboards}\n" +
-                   $"FixMultiplePersonalBestScores = {FixMultiplePersonalBestScores}";
+                   $"FixMultiplePersonalBestScores = {FixMultiplePersonalBestScores}\n" +
+                   $"SyncScoresWithRankedStatus = {SyncScoresWithRankedStatus}";
         }
     }
 }

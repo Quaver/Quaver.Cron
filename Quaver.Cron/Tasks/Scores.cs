@@ -107,5 +107,41 @@ namespace Quaver.Cron.Tasks
             
             Console.WriteLine($"Done fixing multiple personal best scores!", Color.LimeGreen);
         }
+
+        /// <summary>
+        ///     When the ranked status of a map is no longer ranked, this will go through and delete all of the scores
+        ///     for that map.
+        /// </summary>
+        public static void SyncScoresWithRankedStatus()
+        {
+            Console.WriteLine("Starting task to sync scores with their maps ranked status...");
+
+            try
+            {
+                using (var conn = new MySqlConnection(SQL.ConnString))
+                {
+                    conn.Open();
+
+                    var cmd = new MySqlCommand()
+                    {
+                        Connection = conn,
+                        CommandText = "DELETE " +
+                                            "s.* FROM scores s " +
+                                      "LEFT JOIN " +
+                                        "maps m ON s.map_md5 = m.md5 " +
+                                      $"WHERE m.ranked_status <= {(byte) RankedStatus.Unranked}"
+                    };
+                    
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e, Color.LimeGreen);
+                return;
+            }
+            
+            Console.WriteLine($"Done syncing scores with their ranked status!", Color.LimeGreen);
+        }        
     }
 }
