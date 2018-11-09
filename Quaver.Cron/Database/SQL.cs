@@ -1,4 +1,9 @@
-﻿using Quaver.Cron.Config;
+﻿/*
+ * Copyright (c) 2018 Swan <me@swan.moe>
+ * Licensed under the Apache 2.0 License
+ * https://github.com/Swan/Quaver.Cron/blob/master/LICENSE
+ */
+using Quaver.Cron.Config;
 
 namespace Quaver.Cron.Database
 {

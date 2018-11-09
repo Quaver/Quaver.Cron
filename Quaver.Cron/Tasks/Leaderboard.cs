@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2018 Swan <me@swan.moe>
+ * Licensed under the Apache 2.0 License
+ * https://github.com/Swan/Quaver.Cron/blob/master/LICENSE
+ */
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
