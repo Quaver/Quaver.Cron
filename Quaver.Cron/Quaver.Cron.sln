@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quaver.Cron", "Quaver.Cron.csproj", "{071651A4-DEB7-4BF6-B063-9F736F3C75D7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quaver.API", "..\Quaver.API\Quaver.API\Quaver.API.csproj", "{212FE0E5-A198-4DA8-9D56-1A12CA16992B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{071651A4-DEB7-4BF6-B063-9F736F3C75D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{071651A4-DEB7-4BF6-B063-9F736F3C75D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{071651A4-DEB7-4BF6-B063-9F736F3C75D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{212FE0E5-A198-4DA8-9D56-1A12CA16992B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{212FE0E5-A198-4DA8-9D56-1A12CA16992B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{212FE0E5-A198-4DA8-9D56-1A12CA16992B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{212FE0E5-A198-4DA8-9D56-1A12CA16992B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

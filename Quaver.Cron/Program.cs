@@ -7,6 +7,7 @@ using System.Threading;
 using Amib.Threading;
 using Quaver.Cron.Config;
 using Quaver.Cron.Database;
+using Quaver.Cron.Tasks;
 using Console = Colorful.Console;
 
 namespace Quaver.Cron
@@ -57,13 +58,12 @@ namespace Quaver.Cron
             if (Config.PopulateLeaderboards)
                 Pool.QueueWorkItem(Leaderboard.Populate);
 
-
             while (Pool.CurrentWorkItemsCount != 0)
             {
             }
             
             stopwatch.Stop();            
-            Console.WriteLine($"Cron has completed in {stopwatch.ElapsedMilliseconds / 1000} sec", Color.LimeGreen);
+            Console.WriteLine($"Cron completed in {stopwatch.ElapsedMilliseconds / 1000f} sec", Color.LimeGreen);
         }
     }
 }
