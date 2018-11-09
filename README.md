@@ -14,7 +14,7 @@ dotnet build --configuration release
 cd bin/Release/netcoreapp2.0
 nano .env
 (Setup Config)
-dotnet run Quaver.Cron.dll
+dotnet Quaver.Cron.dll
 ```
 
 ## Configuration
