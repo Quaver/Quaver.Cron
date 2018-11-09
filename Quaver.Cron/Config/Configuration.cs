@@ -15,14 +15,20 @@ namespace Quaver.Cron.Config
         public string SQLUsername { get; }
         public string SQLPassword { get; }
         public string SQLDatabase { get; }
-
         public string RedisServer { get; }
         public string RedisPassword { get; }
+        public int Workers { get; }
 
         /// <summary>
         ///     Determines if we want to populate the leaderboards in Redis with user ratings.
         /// </summary>
         public bool PopulateLeaderboards { get; }
+
+        /// <summary>
+        ///     Determines if during the job we want to fix multiple personal best scores
+        ///     on a map by a user.
+        /// </summary>
+        public bool FixMultiplePersonalBestScores { get; }
 
         /// <summary>
         ///     The path of the config file.
@@ -33,8 +39,6 @@ namespace Quaver.Cron.Config
         /// </summary>
         public Configuration()
         {
-            Console.WriteLine($"Loading config at path: {ConfigPath}", Color.LimeGreen);
-
             try
             {
                 DotNetEnv.Env.Load(ConfigPath);
@@ -44,8 +48,10 @@ namespace Quaver.Cron.Config
                 SQLPassword = DotNetEnv.Env.GetString("SQLPassword");
                 SQLDatabase = DotNetEnv.Env.GetString("SQLDatabase");
                 RedisServer = DotNetEnv.Env.GetString("RedisServer");
-                RedisPassword = DotNetEnv.Env.GetString("RedisPassword");             
+                RedisPassword = DotNetEnv.Env.GetString("RedisPassword");
+                Workers = DotNetEnv.Env.GetInt("Workers");
                 PopulateLeaderboards = DotNetEnv.Env.GetBool("PopulateLeaderboards");
+                FixMultiplePersonalBestScores = DotNetEnv.Env.GetBool("FixMultiplePersonalBestScores");
             }
             catch (Exception e)
             {
@@ -62,7 +68,8 @@ namespace Quaver.Cron.Config
         /// <returns></returns>
         public override string ToString()
         {
-            return $"PopulateLeaderboards = {PopulateLeaderboards}";
+            return $"PopulateLeaderboards = {PopulateLeaderboards}\n" +
+                   $"FixMultiplePersonalBestScores = {FixMultiplePersonalBestScores}";
         }
     }
 }

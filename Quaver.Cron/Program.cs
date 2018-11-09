@@ -32,14 +32,7 @@ namespace Quaver.Cron
         /// <summary>
         ///     Thread pool used to run different tasks
         /// </summary>
-        internal static SmartThreadPool Pool { get; } = new SmartThreadPool(new STPStartInfo
-        {
-            AreThreadsBackground = true,
-            IdleTimeout = 600000,
-            MaxWorkerThreads = 32,
-            MinWorkerThreads = 8,
-            ThreadPriority = ThreadPriority.AboveNormal
-        });
+        internal static SmartThreadPool Pool { get; private set; } 
 
         /// <summary>
         ///     The config file used to determine the type of things to perform on the cron.
@@ -56,13 +49,26 @@ namespace Quaver.Cron
             
             Config = new Configuration();
             
+            Console.WriteLine($"Creating thread pool with {Config.Workers} workers");
+            
+            Pool = new SmartThreadPool(new STPStartInfo
+            {
+                AreThreadsBackground = true,
+                IdleTimeout = 600000,
+                MaxWorkerThreads = 32,
+                MinWorkerThreads = Config.Workers,
+                ThreadPriority = ThreadPriority.AboveNormal
+            });
+            
             Redis.Initialize(Config);
             SQL.Initialize(Config);
-            Console.WriteLine(Config.ToString());
 
             if (Config.PopulateLeaderboards)
                 Pool.QueueWorkItem(Leaderboard.Populate);
 
+            if (Config.FixMultiplePersonalBestScores)
+                Pool.QueueWorkItem(Scores.FixMultiplePersonalBests);
+                  
             while (Pool.CurrentWorkItemsCount != 0)
             {
             }

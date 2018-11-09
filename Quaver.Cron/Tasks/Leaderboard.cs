@@ -21,7 +21,7 @@ namespace Quaver.Cron.Tasks
         /// </summary>
         public static void Populate()
         {
-            Console.WriteLine($"Populating leaderboards in Redis...", Color.LimeGreen);
+            Console.WriteLine($"Starting task to populate leaderboards in Redis...");
             
             try
             {
