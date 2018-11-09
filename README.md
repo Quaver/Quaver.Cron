@@ -11,7 +11,7 @@ You'll need [.NET Core 2.0](https://www.microsoft.com/net/download/dotnet-core/2
 ```bash
 git clone --recurse-submodules https://github.com/Quaver/Quaver.Cron
 dotnet build --configuration release
-cd bin/Debug/netcoreapp2.0/Release
+cd bin/Release/netcoreapp2.0
 nano .env
 (Setup Config)
 dotnet run Quaver.Cron.dll
