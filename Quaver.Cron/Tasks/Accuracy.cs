@@ -102,7 +102,7 @@ namespace Quaver.Cron.Tasks
             if (scores.Count == 0)
                 return 0;
 
-            return scores.Select((t, i) => t.Accuracy * Math.Pow(0.95, i)).Sum() / scores.Count;;
+            return scores.Select((t, i) => t.Accuracy * Math.Pow(0.95, i)).Sum() / scores.Count;
         }
     }
 }
