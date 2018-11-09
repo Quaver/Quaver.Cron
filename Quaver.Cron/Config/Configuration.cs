@@ -38,8 +38,8 @@ namespace Quaver.Cron.Config
         /// <summary>
         ///     The path of the config file.
         /// </summary>
-        private static string ConfigPath { get; } = $"{Program.WorkingDirectory}/.env";
-        
+        private static string ConfigPath { get; } = $"./.env";
+
         /// <summary>
         /// </summary>
         public Configuration()

@@ -20,19 +20,9 @@ namespace Quaver.Cron
     internal static class Program
     {
         /// <summary>
-        ///     The path of the current executable.
-        /// </summary>
-        internal static string ExecutablePath => System.Reflection.Assembly.GetExecutingAssembly().CodeBase.Replace(@"file:///", "");
-
-        /// <summary>
-        ///     The current working directory of the executable.
-        /// </summary>
-        internal static string WorkingDirectory => Path.GetDirectoryName(ExecutablePath).Replace(@"file:\", "");
-
-        /// <summary>
         ///     Thread pool used to run different tasks
         /// </summary>
-        internal static SmartThreadPool Pool { get; private set; } 
+        internal static SmartThreadPool Pool { get; private set; }
 
         /// <summary>
         ///     The config file used to determine the type of things to perform on the cron.
@@ -46,11 +36,11 @@ namespace Quaver.Cron
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            
+
             Config = new Configuration();
-            
+
             Console.WriteLine($"Creating thread pool with {Config.Workers} workers");
-            
+
             Pool = new SmartThreadPool(new STPStartInfo
             {
                 AreThreadsBackground = true,
@@ -59,7 +49,7 @@ namespace Quaver.Cron
                 MinWorkerThreads = Config.Workers,
                 ThreadPriority = ThreadPriority.AboveNormal
             });
-            
+
             Redis.Initialize(Config);
             SQL.Initialize(Config);
 
@@ -71,12 +61,12 @@ namespace Quaver.Cron
 
             if (Config.SyncScoresWithRankedStatus)
                 Pool.QueueWorkItem(Scores.SyncScoresWithRankedStatus);
-                    
+
             while (Pool.CurrentWorkItemsCount != 0)
             {
             }
-            
-            stopwatch.Stop();            
+
+            stopwatch.Stop();
             Console.WriteLine($"Cron completed in {stopwatch.ElapsedMilliseconds / 1000f} sec", Color.LimeGreen);
         }
     }
