@@ -1,6 +1,6 @@
 # Quaver.Cron [![Discord](https://discordapp.com/api/guilds/354206121386573824/widget.png?style=shield)](https://discord.gg/nJa8VFr)
 
->🕒 A cron for Quaver to perform automated tasks related to its Database.
+>🕒 A cron for Quaver to perform automated tasks related to its database.
 
 Developed for internal purposes. No support or documentation for this software is provided.
 
