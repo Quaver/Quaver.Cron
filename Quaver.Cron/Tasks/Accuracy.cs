@@ -102,12 +102,23 @@ namespace Quaver.Cron.Tasks
         /// </summary>
         /// <param name="scores"></param>
         /// <returns></returns>
-        private static double CalculateOverallAccuracy(IReadOnlyCollection<Score> scores)
+        private static double CalculateOverallAccuracy(List<Score> scores)
         {
-            if (scores.Count == 0)
+            var total = 0d;
+            var divideTotal = 0d;
+
+            for (var i = 0; i < scores.Count; i++)
+            {
+                var add = Math.Pow(0.95f, i) * 100;
+                total += scores[i].Accuracy * add;
+                divideTotal += add;
+            }
+
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            if (divideTotal == 0)
                 return 0;
 
-            return scores.Select((t, i) => t.Accuracy * Math.Pow(0.95, i)).Sum() / scores.Count;
+            return total / divideTotal;
         }
     }
 }
