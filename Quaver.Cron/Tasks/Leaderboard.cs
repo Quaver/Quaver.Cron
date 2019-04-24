@@ -50,10 +50,12 @@ namespace Quaver.Cron.Tasks
                 // Get the keys for country & global leaderboards.
                 var countryKeys = server.Keys(database.Database, "quaver:country_leaderboard:*").ToList();
                 var keys = server.Keys(database.Database, "quaver:leaderboard:*").ToList();
+                var multiplayerKeys = server.Keys(database.Database, "quaver:multiplayer_win_leaderboard:*").ToList();
 
                 // Delete existing keys
                 keys.ForEach(x => database.KeyDelete(x));
                 countryKeys.ForEach(x => database.KeyDelete(x));
+                multiplayerKeys.ForEach(x => database.KeyDelete(x));
             }
         }
 
@@ -74,7 +76,7 @@ namespace Quaver.Cron.Tasks
                     {
                         Connection = conn,
                         CommandText = $"SELECT " +
-                                      $"u.id, u.country, s.overall_performance_rating " +
+                                      $"u.id, u.country, s.overall_performance_rating, s.multiplayer_wins " +
                                       $"FROM " +
                                       $"users u " +
                                       $"INNER JOIN " +
@@ -93,16 +95,17 @@ namespace Quaver.Cron.Tasks
                             var id = reader.GetInt32(0);
                             var country = reader.GetString(1);
                             var rating = reader.GetDouble(2);
+                            var multiplayerWins = reader.GetInt32(3);
 
                             // Add to global leaderboard
                             redis.SortedSetAdd($"quaver:leaderboard:{(byte) mode}", id, rating);
+                            redis.SortedSetAdd($"quaver:multiplayer_win_leaderboard:{(byte) mode}", id, multiplayerWins);
 
                             // Skip users with an unknown country.
                             if (country.ToUpper() == "XX")
                                 continue;
 
                             // Add to country leaderboards.
-
                             redis.SortedSetAdd($"quaver:country_leaderboard:{country.ToLower()}:{(byte) mode}", id, rating);
                         }
                     }
