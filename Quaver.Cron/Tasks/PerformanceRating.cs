@@ -40,7 +40,7 @@ namespace Quaver.Cron.Tasks
                                             $"s.user_id, s.mode, s.performance_rating " +
                                       $"FROM scores s " +
                                       $"INNER JOIN users u ON u.id = s.user_id " +
-                                      $"WHERE personal_best = 1 AND is_donator_score = 0 " +
+                                      $"WHERE personal_best = 1 AND s.is_donator_score = 0 " +
                                       $"ORDER BY s.performance_rating DESC"
                     };
 
