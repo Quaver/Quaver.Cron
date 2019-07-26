@@ -41,7 +41,7 @@ namespace Quaver.Cron.Tasks
                                             $"id, user_id, map_md5, mode, performance_rating " +
                                       $"FROM " +
                                         $"scores " +
-                                      $"WHERE personal_best = 1"
+                                      $"WHERE personal_best = 1 AND is_donator_score = 0"
                     };
 
                     using (var reader = cmd.ExecuteReader())
