@@ -129,7 +129,7 @@ namespace Quaver.Cron.Tasks
                                             "s.* FROM scores s " +
                                       "LEFT JOIN " +
                                         "maps m ON s.map_md5 = m.md5 " +
-                                      $"WHERE m.ranked_status <= {(byte) RankedStatus.Unranked}"
+                                      $"WHERE m.ranked_status <= {(byte) RankedStatus.Unranked} AND s.is_donator_score = 0"
                     };
                     
                     cmd.ExecuteNonQuery();
