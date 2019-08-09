@@ -41,7 +41,7 @@ namespace Quaver.Cron.Tasks
                                       $"FROM scores s " +
                                       $"INNER JOIN users u ON u.id = s.user_id " +
                                       $"WHERE personal_best = 1 AND s.is_donator_score = 0 " +
-                                      $"ORDER BY s.accuracy DESC"
+                                      $"ORDER BY s.performance_rating DESC"
                     };
 
                     using (var reader = cmd.ExecuteReader())
