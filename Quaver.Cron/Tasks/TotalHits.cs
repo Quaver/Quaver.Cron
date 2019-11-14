@@ -107,9 +107,9 @@ namespace Quaver.Cron.Tasks
             var cmd3 = new MySqlCommand()
             {
                 Connection = conn,
-                CommandText = $"UPDATE user_stats_{mode.ToString().ToLower()} SET count_marv = @count_marv, " +
-                              $"count_perf = @count_perf, count_great = @count_great, count_good = @count_good, " +
-                              $"count_okay = @count_okay WHERE user_id = @id"
+                CommandText = $"UPDATE user_stats_{mode.ToString().ToLower()} SET total_marv = @count_marv, " +
+                              $"total_perf = @count_perf, total_great = @count_great, total_good = @count_good, " +
+                              $"total_okay = @count_okay WHERE user_id = @id"
             };
 
             cmd3.Prepare();
