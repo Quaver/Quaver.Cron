@@ -121,7 +121,7 @@ namespace Quaver.Cron.Tasks
             cmd3.Parameters.AddWithValue("count_okay", judgements[Judgement.Okay]);
             cmd3.Parameters.AddWithValue("id", user);
 
-            cmd2.ExecuteNonQuery();
+            cmd3.ExecuteNonQuery();
             Console.WriteLine($"Updated total hits for user: {user} - {mode} - {judgements.Values.Sum()}");
         }
     }
