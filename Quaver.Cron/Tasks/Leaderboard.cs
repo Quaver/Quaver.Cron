@@ -51,11 +51,13 @@ namespace Quaver.Cron.Tasks
                 var countryKeys = server.Keys(database.Database, "quaver:country_leaderboard:*").ToList();
                 var keys = server.Keys(database.Database, "quaver:leaderboard:*").ToList();
                 var multiplayerKeys = server.Keys(database.Database, "quaver:multiplayer_win_leaderboard:*").ToList();
+                var totalHitsKeys = server.Keys(database.Database, "quaver:leaderboard:total_hits_global").ToList();
 
                 // Delete existing keys
                 keys.ForEach(x => database.KeyDelete(x));
                 countryKeys.ForEach(x => database.KeyDelete(x));
                 multiplayerKeys.ForEach(x => database.KeyDelete(x));
+                totalHitsKeys.ForEach(x => database.KeyDelete(x));
             }
         }
 
@@ -76,7 +78,8 @@ namespace Quaver.Cron.Tasks
                     {
                         Connection = conn,
                         CommandText = $"SELECT " +
-                                      $"u.id, u.country, s.overall_performance_rating, s.multiplayer_wins " +
+                                      $"u.id, u.country, s.overall_performance_rating, s.multiplayer_wins, s.total_marv, " +
+                                      $"s.total_perf, s.total_great, s.total_good, s.total_okay " +
                                       $"FROM " +
                                       $"users u " +
                                       $"INNER JOIN " +
@@ -96,10 +99,21 @@ namespace Quaver.Cron.Tasks
                             var country = reader.GetString(1);
                             var rating = reader.GetDouble(2);
                             var multiplayerWins = reader.GetInt32(3);
+                            var totalMarv = reader.GetInt32(4);
+                            var totalPerf = reader.GetInt32(5);
+                            var totalGreat = reader.GetInt32(6);
+                            var totalGood = reader.GetInt32(7);
+                            var totalOkay = reader.GetInt32(8);
 
                             // Add to global leaderboard
                             redis.SortedSetAdd($"quaver:leaderboard:{(byte) mode}", id, rating);
                             redis.SortedSetAdd($"quaver:multiplayer_win_leaderboard:{(byte) mode}", id, multiplayerWins);
+
+                            // Total hits leaderboard
+                            const string hitsKey = "quaver:leaderboard:total_hits_global";
+                            var totalHits = redis.SortedSetScore(hitsKey, id) ?? 0;
+                            var hits = totalHits + totalMarv + totalPerf + totalGreat + totalGood + totalOkay;
+                            redis.SortedSetAdd(hitsKey, id, (int) hits);
 
                             // Skip users with an unknown country.
                             if (country.ToUpper() == "XX")
