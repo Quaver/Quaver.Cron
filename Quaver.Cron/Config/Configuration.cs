@@ -46,6 +46,11 @@ namespace Quaver.Cron.Config
         public bool RecalculateOverallPerformanceRating { get; }
 
         /// <summary>
+        ///     If the cron will fix the user's total hits from their scores
+        /// </summary>
+        public bool FixTotalHitCount { get; }
+
+        /// <summary>
         ///     The path of the config file.
         /// </summary>
         private static string ConfigPath { get; } = $"./.env";
@@ -70,6 +75,7 @@ namespace Quaver.Cron.Config
                 SyncScoresWithRankedStatus = DotNetEnv.Env.GetBool("SyncScoresWithRankedStatus");
                 RecalculateOverallAccuracy = DotNetEnv.Env.GetBool("RecalculateOverallAccuracy");
                 RecalculateOverallPerformanceRating = DotNetEnv.Env.GetBool("RecalculateOverallPerformanceRating");
+                FixTotalHitCount = DotNetEnv.Env.GetBool("FixTotalHitCount");
             }
             catch (Exception e)
             {
@@ -88,6 +94,7 @@ namespace Quaver.Cron.Config
                                              $"FixMultiplePersonalBestScores = {FixMultiplePersonalBestScores}\n" +
                                              $"SyncScoresWithRankedStatus = {SyncScoresWithRankedStatus}\n" +
                                              $"RecalculateOverallAccuracy = {RecalculateOverallAccuracy}\n" +
-                                             $"RecalculateOverallPerformanceRating = {RecalculateOverallPerformanceRating}";
+                                             $"RecalculateOverallPerformanceRating = {RecalculateOverallPerformanceRating}\n" +
+                                             $"FixTotalHitCount = {FixTotalHitCount}";
     }
 }
