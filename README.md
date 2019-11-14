@@ -37,6 +37,7 @@ FixMultiplePersonalBestScores = True
 SyncScoresWithRankedStatus = True
 RecalculateOverallAccuracy = True
 RecalculateOverallPerformanceRating = True
+FixTotalHitCount = False
 ```
 
 # LICENSE
