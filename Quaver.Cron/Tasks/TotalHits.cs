@@ -44,7 +44,6 @@ namespace Quaver.Cron.Tasks
                         }
                     }
 
-                    // RECALC ALL SCORES
                     foreach (var user in users)
                     {
                         UpdateTotalHitsForMode(conn, GameMode.Keys4, user);
