@@ -7,9 +7,9 @@
     <PackageReference Include="Colorful.Console" Version="1.2.9" />
     <PackageReference Include="DotNetEnv" Version="1.2.0" />
     <PackageReference Include="MySqlConnector" Version="0.47.1" />
-    <PackageReference Include="ServiceStack.Redis.Core" Version="5.4.0" />
+    <PackageReference Include="ServiceStack.Redis.Core" Version="5.9.0" />
     <PackageReference Include="SmartThreadPool.NetCore" Version="2.3.0" />
-    <PackageReference Include="StackExchange.Redis" Version="2.0.513" />
+    <PackageReference Include="StackExchange.Redis" Version="2.1.58" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Quaver.API\Quaver.API\Quaver.API.csproj" />
