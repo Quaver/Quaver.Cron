@@ -50,7 +50,7 @@ namespace Quaver.Cron
                 ThreadPriority = ThreadPriority.AboveNormal
             });
 
-            Redis.Initialize(Config);
+            // Redis.Initialize(Config);
             SQL.Initialize(Config);
 
             if (Config.PopulateLeaderboards)
